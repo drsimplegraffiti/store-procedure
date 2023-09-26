@@ -114,3 +114,16 @@ BEGIN
     DELETE FROM Team WHERE Id = @Id;
 END;
 ```
+
+##### Find particular item
+```sql
+DECLARE @RC int
+DECLARE @Id int
+
+-- TODO: Set parameter values here.
+SET @Id = 7
+
+EXECUTE @RC = [dbo].[usp_GetTeamById] 
+   @Id
+GO
+```
