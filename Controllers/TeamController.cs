@@ -166,6 +166,36 @@ namespace StoreProcedureApi.Controllers
 
             return msg;
         }
-      
+
+        [HttpGet("email")]
+        public Team GetByEmail(string email)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("usp_GetTeamByEmail", _connection);
+            da.SelectCommand.CommandType = CommandType.StoredProcedure;
+            da.SelectCommand.Parameters.AddWithValue("@Email",email);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            Team tm = new Team();
+            if (dt.Rows.Count > 0)
+            {
+                
+                tm.FirstName = dt.Rows[0]["FirstName"].ToString();
+                tm.LastName = dt.Rows[0]["LastName"].ToString();
+                tm.Email = dt.Rows[0]["Email"].ToString();
+                tm.Age = (int)dt.Rows[0]["Age"];
+                tm.Password = dt.Rows[0]["Password"].ToString();
+                tm.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
+            }
+
+            if (tm != null)
+            {
+                return tm;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

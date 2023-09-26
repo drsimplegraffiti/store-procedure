@@ -127,3 +127,17 @@ EXECUTE @RC = [dbo].[usp_GetTeamById]
    @Id
 GO
 ```
+
+---
+
+##### Get by email
+```sql
+CREATE PROCEDURE usp_GetTeamByEmail
+(
+    @Email VARCHAR(100)
+)
+AS
+BEGIN
+    SELECT * FROM Team WHERE Email = @Email;
+END;
+```
